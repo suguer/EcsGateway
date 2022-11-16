@@ -139,7 +139,9 @@ func (g *AliyunGateway) DescribeAvailableInstance(instance *model.Instance) ([]m
 		return InstanceData, err
 	}
 	for _, AvailableZone := range response.Body.AvailableZones.AvailableZone {
-
+		if len(AvailableZone.AvailableResources.AvailableResource) == 0 {
+			continue
+		}
 		for _, SupportedResource := range AvailableZone.AvailableResources.AvailableResource[0].SupportedResources.SupportedResource {
 			if *SupportedResource.Status != "Available" {
 				continue
