@@ -51,3 +51,18 @@ func (Region) Save(temp []Region, platform string) {
 	file.WriteString(string(content))
 	file.Close()
 }
+
+func (Region) GetData() ([]Region, error) {
+	var RegionData []Region
+	pwd, _ := os.Getwd()
+	path := pwd + RegionPath
+	read, err := ioutil.ReadFile(path)
+	if err != nil {
+		return RegionData, err
+	}
+	err = json.Unmarshal(read, &RegionData)
+	if err != nil {
+		return RegionData, err
+	}
+	return RegionData, nil
+}
