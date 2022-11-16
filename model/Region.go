@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/suguer/EcsGateway/config"
 	"github.com/suguer/EcsGateway/private/utils"
 )
 
@@ -15,8 +16,7 @@ type Region struct {
 	Platform []string
 }
 
-const StoragePath = ""
-const RegionPath = StoragePath + "/RegionData.json"
+const RegionPath = config.StoragePath + "/RegionData.json"
 
 func (Region) Save(temp []Region, platform string) {
 	pwd, _ := os.Getwd()

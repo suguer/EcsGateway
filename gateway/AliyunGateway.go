@@ -11,6 +11,7 @@ import (
 	openapi "github.com/alibabacloud-go/darabonba-openapi/v2/client"
 	ecs20140526 "github.com/alibabacloud-go/ecs-20140526/v3/client"
 	"github.com/alibabacloud-go/tea/tea"
+	"github.com/suguer/EcsGateway/config"
 	"github.com/suguer/EcsGateway/model"
 	"github.com/suguer/EcsGateway/model/aliyun"
 	"github.com/suguer/EcsGateway/private/http"
@@ -171,7 +172,7 @@ func (g *AliyunGateway) buildParam(request *http.HttpRequest) {
 func (g *AliyunGateway) DownloadCache() {
 	resp, _ := nethttp.Get("https://g.alicdn.com/aliyun/ecs-price-info/2.0.211/price/download/bandWidthPrice.json")
 	body, _ := ioutil.ReadAll(resp.Body)
-	file, err := os.OpenFile("storage/aliyun_bandWidthPrice.json", os.O_WRONLY|os.O_CREATE, 0755)
+	file, err := os.OpenFile(config.StoragePath+"/aliyun_bandWidthPrice.json", os.O_WRONLY|os.O_CREATE, 0755)
 	if err != nil {
 		fmt.Println("文件打开/创建失败,原因是:", err)
 		return
