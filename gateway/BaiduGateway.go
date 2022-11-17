@@ -51,7 +51,7 @@ func (g *BaiduGateway) DescribeAvailableInstance(instance *model.Instance) ([]mo
 				if instance.Hardware.CpuCount > 0 && instance.Hardware.CpuCount != bf.CpuCount {
 					continue
 				}
-				if instance.Hardware.MemoryCapacityInGB > 0 && instance.Hardware.MemoryCapacityInGB != bf.MemoryCapacityInGB*1024 {
+				if instance.Hardware.MemoryCapacityInMB > 0 && instance.Hardware.MemoryCapacityInMB != bf.MemoryCapacityInMB*1024 {
 					continue
 				}
 				//防重插入检测

@@ -3,7 +3,7 @@ package model
 type Hardware struct {
 	InstanceType       string
 	CpuCount           int
-	MemoryCapacityInGB int
+	MemoryCapacityInMB int
 	CpuPlatform        string
 }
 type Network struct {

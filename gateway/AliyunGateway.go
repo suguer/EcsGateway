@@ -132,7 +132,7 @@ func (g *AliyunGateway) DescribeAvailableInstance(instance *model.Instance) ([]m
 		InstanceChargeType:  tea.String("PrePaid"),
 		RegionId:            &instance.RegionId,
 		Cores:               tea.ToInt32(&instance.Hardware.CpuCount),
-		Memory:              tea.Float32(float32(instance.Hardware.MemoryCapacityInGB / 1024)),
+		Memory:              tea.Float32(float32(instance.Hardware.MemoryCapacityInMB / 1024)),
 	}
 	response, err := g.client.DescribeAvailableResource(request)
 	if err != nil {
@@ -142,8 +142,17 @@ func (g *AliyunGateway) DescribeAvailableInstance(instance *model.Instance) ([]m
 		if len(AvailableZone.AvailableResources.AvailableResource) == 0 {
 			continue
 		}
+		if *AvailableZone.StatusCategory != "WithStock" {
+			continue
+		}
+		if *AvailableZone.Status != "Available" {
+			continue
+		}
 		for _, SupportedResource := range AvailableZone.AvailableResources.AvailableResource[0].SupportedResources.SupportedResource {
 			if *SupportedResource.Status != "Available" {
+				continue
+			}
+			if *SupportedResource.StatusCategory != "WithStock" {
 				continue
 			}
 			var temp model.Instance

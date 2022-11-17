@@ -96,7 +96,7 @@ func (g *UcloudGateway) DescribePrice(instance *model.Instance) (*model.PriceInf
 	GetUHostInstancePriceRequest.CpuPlatform = &instance.Hardware.CpuPlatform
 	GetUHostInstancePriceRequest.MachineType = &instance.Hardware.InstanceType
 	GetUHostInstancePriceRequest.CPU = &instance.Hardware.CpuCount
-	GetUHostInstancePriceRequest.Memory = &instance.Hardware.MemoryCapacityInGB
+	GetUHostInstancePriceRequest.Memory = &instance.Hardware.MemoryCapacityInMB
 	GetUHostInstancePriceRequest.Disks = append(GetUHostInstancePriceRequest.Disks, uhost.UHostDisk{
 		IsBoot: tea.String("True"),
 		Size:   &instance.SystemDisk.Size,

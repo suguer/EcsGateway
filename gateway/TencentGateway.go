@@ -67,7 +67,7 @@ func (g *TencentGateway) DescribeAvailableInstance(instance *model.Instance) ([]
 		if instance.Hardware.CpuCount > 0 && instance.Hardware.CpuCount != int(*itc.CPU) {
 			continue
 		}
-		if instance.Hardware.MemoryCapacityInGB > 0 && instance.Hardware.MemoryCapacityInGB != int(*itc.Memory)*1024 {
+		if instance.Hardware.MemoryCapacityInMB > 0 && instance.Hardware.MemoryCapacityInMB != int(*itc.Memory)*1024 {
 			continue
 		}
 		var temp model.Instance
