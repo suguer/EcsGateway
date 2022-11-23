@@ -20,10 +20,10 @@ func (g *BaiduGateway) Init(c *model.Config) {
 }
 
 func (g *BaiduGateway) DescribeRegions() ([]model.Region, error) {
-	baidu := pro.NewBaiduPro()
-	data := baidu.DescribeRegions()
+	pro := pro.NewBaiduPro()
+	data := pro.DescribeRegions()
 	for k, r := range data {
-		data[k].RegionId = baidu.GetRegionMapValue(r.RegionId)
+		data[k].RegionId = pro.GetRegionMapValue(r.RegionId)
 	}
 	model.Region{}.Save(data, "baidu")
 	return data, nil
@@ -51,7 +51,7 @@ func (g *BaiduGateway) DescribeAvailableInstance(instance *model.Instance) ([]mo
 				if instance.Hardware.CpuCount > 0 && instance.Hardware.CpuCount != bf.CpuCount {
 					continue
 				}
-				if instance.Hardware.MemoryCapacityInMB > 0 && instance.Hardware.MemoryCapacityInMB != bf.MemoryCapacityInMB*1024 {
+				if instance.Hardware.MemoryCapacityInMB > 0 && instance.Hardware.MemoryCapacityInMB != bf.MemoryCapacityInGB*1024 {
 					continue
 				}
 				//防重插入检测
@@ -71,9 +71,9 @@ func (g *BaiduGateway) DescribeAvailableInstance(instance *model.Instance) ([]mo
 }
 func (g *BaiduGateway) DescribePrice(instance *model.Instance) (*model.PriceInfo, error) {
 	data := &model.PriceInfo{}
-	baidu := pro.NewBaiduPro()
-	Region := baidu.GetRegionMapKey(instance.RegionId)
-	g.client.Config.Endpoint = baidu.GetEndPoint(Region)
+	pro := pro.NewBaiduPro()
+	Region := pro.GetRegionMapKey(instance.RegionId)
+	g.client.Config.Endpoint = pro.GetEndPoint(Region)
 	Period := instance.Period
 	if instance.PriceUnit == "Year" {
 		Period *= 12

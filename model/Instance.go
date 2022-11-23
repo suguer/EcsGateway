@@ -14,10 +14,17 @@ type Disk struct {
 	Category string
 	Size     int
 }
+type Image struct {
+	OSName  string
+	ImageId string
+	OSType  string
+}
 type Instance struct {
-	RegionId   string
-	ZoneId     string
-	ImageId    string
+	RegionId string
+	ZoneId   string
+	Image    Image
+	// ImageId  string
+	// ImageSystem string
 	Hardware   Hardware
 	Network    Network
 	SystemDisk Disk

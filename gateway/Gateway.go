@@ -62,6 +62,10 @@ func NewGatewayInterface(platform string, c *model.Config) (GatewayInterface, er
 		gateway = &TencentGateway{}
 	case "baidu":
 		gateway = &BaiduGateway{}
+	case "jdcloud":
+		gateway = &JdCloudGateway{}
+	case "aws":
+		gateway = &AwsCloudGateway{}
 	default:
 		return nil, errors.New("unspport")
 	}
