@@ -91,7 +91,7 @@ func (g *TencentGateway) DescribePrice(instance *model.Instance) (*model.PriceIn
 	}
 	request.InstanceType = &instance.Hardware.InstanceType
 	Period := instance.Period
-	if instance.PriceUnit == "Year" {
+	if instance.PeriodUnit == "Year" {
 		Period *= 12
 	}
 	request.InstanceChargePrepaid = &cvm.InstanceChargePrepaid{

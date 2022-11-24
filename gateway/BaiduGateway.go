@@ -75,7 +75,7 @@ func (g *BaiduGateway) DescribePrice(instance *model.Instance) (*model.PriceInfo
 	Region := pro.GetRegionMapKey(instance.RegionId)
 	g.client.Config.Endpoint = pro.GetEndPoint(Region)
 	Period := instance.Period
-	if instance.PriceUnit == "Year" {
+	if instance.PeriodUnit == "Year" {
 		Period *= 12
 	}
 	request := &api.GetPriceBySpecArgs{

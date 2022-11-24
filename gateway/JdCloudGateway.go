@@ -76,7 +76,7 @@ func (g *JdCloudGateway) DescribePrice(instance *model.Instance) (*model.PriceIn
 	Region := pro.GetRegionMapKey(instance.RegionId)
 	reqeust := billing.NewCalculateTotalPriceRequest(Region, 1, 1)
 	TimeUnit := 3
-	if instance.PriceUnit == "Year" {
+	if instance.PeriodUnit == "Year" {
 		TimeUnit = 4
 	}
 	reqeust.OrderList = append(reqeust.OrderList, billingModels.OrderPriceProtocol{
@@ -99,9 +99,10 @@ func (g *JdCloudGateway) DescribePrice(instance *model.Instance) (*model.PriceIn
 	client.DisableLogger()
 
 	response, err := client.CalculateTotalPrice(reqeust)
+	fmt.Printf("response: %+v\n", response)
 	if err != nil {
 		return data, err
 	}
-	fmt.Printf("response: %+v\n", response)
+
 	return data, nil
 }

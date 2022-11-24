@@ -60,7 +60,7 @@ func (g *AliyunGateway) DescribePrice(instance *model.Instance) (*model.PriceInf
 		RegionId:     &instance.RegionId,
 		ZoneId:       &instance.ZoneId,
 		Period:       tea.ToInt32(&instance.Period),
-		PriceUnit:    &instance.PriceUnit,
+		PriceUnit:    &instance.PeriodUnit,
 		ResourceType: tea.String("instance"),
 		InstanceType: &instance.Hardware.InstanceType,
 	}
@@ -91,7 +91,7 @@ func (g *AliyunGateway) DescribePrice(instance *model.Instance) (*model.PriceInf
 	//计算IP
 	if instance.Network.InternetMaxBandwidthOut > 0 {
 		month := instance.Period
-		if instance.PriceUnit == "Year" {
+		if instance.PeriodUnit == "Year" {
 			month = instance.Period * 12
 		}
 

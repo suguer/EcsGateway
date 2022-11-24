@@ -3,6 +3,7 @@ package gateway
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/alibabacloud-go/tea/tea"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -185,6 +186,8 @@ func (g *AwsCloudGateway) DescribePrice(instance *model.Instance) (*model.PriceI
 		})
 	request.Filters = Filters
 	response, err := client.GetProducts(context.TODO(), request)
+	fmt.Printf("instance: %v\n", instance)
+	fmt.Printf("response: %v\n", response)
 	if err != nil {
 		return data, err
 	}
@@ -195,7 +198,7 @@ func (g *AwsCloudGateway) DescribePrice(instance *model.Instance) (*model.PriceI
 		for _, ti := range GetProductItem.Terms.OnDemand {
 			for _, pd := range ti.PriceDimensions {
 				Period := instance.Period * 30 * 24
-				if instance.PriceUnit == "Year" {
+				if instance.PeriodUnit == "Year" {
 					Period = instance.Period * 365 * 24
 				}
 				// fmt.Printf("Period: %v\n", Period)

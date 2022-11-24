@@ -20,6 +20,7 @@ type Image struct {
 	OSType  string
 }
 type Instance struct {
+	Platform string
 	RegionId string
 	ZoneId   string
 	Image    Image
@@ -30,7 +31,7 @@ type Instance struct {
 	SystemDisk Disk
 	DataDisk   []Disk
 	Period     int
-	PriceUnit  string
+	PeriodUnit string
 }
 
 func (m *Instance) DeepCopy(desc *Instance) {

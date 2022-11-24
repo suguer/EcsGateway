@@ -91,7 +91,7 @@ func (g *UcloudGateway) DescribePrice(instance *model.Instance) (*model.PriceInf
 	GetUHostInstancePriceRequest.Count = tea.Int(1)
 	GetUHostInstancePriceRequest.Region = &Region
 	GetUHostInstancePriceRequest.Zone = &instance.ZoneId
-	GetUHostInstancePriceRequest.ChargeType = &instance.PriceUnit
+	GetUHostInstancePriceRequest.ChargeType = &instance.PeriodUnit
 	GetUHostInstancePriceRequest.Quantity = &instance.Period
 	GetUHostInstancePriceRequest.CpuPlatform = &instance.Hardware.CpuPlatform
 	GetUHostInstancePriceRequest.MachineType = &instance.Hardware.InstanceType
@@ -128,7 +128,7 @@ func (g *UcloudGateway) DescribePrice(instance *model.Instance) (*model.PriceInf
 		req := unetClient.NewGetEIPPriceRequest()
 		req.Region = &Region
 		req.Bandwidth = &instance.Network.InternetMaxBandwidthOut
-		req.ChargeType = &instance.PriceUnit
+		req.ChargeType = &instance.PeriodUnit
 		req.Quantity = &instance.Period
 
 		req.OperatorName = tea.String(ucloud.GetOperatorArray(Region))
